@@ -1,18 +1,32 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <b-row>
+      <b-col md="3" class="weatherInfoCol">
+        <WeatherInfoCard ref="weatherInfoCard" :lat="lat" :long="long" />
+      </b-col>
+    </b-row>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import WeatherInfoCard from '@/components/WeatherInfoCard.vue'
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld
+    WeatherInfoCard
+  },
+  data () {
+    return {
+      lat: 37.7764685,
+      long: -122.4193891
+    }
   }
 }
 </script>
+<style scoped lang="scss">
+.weatherInfoCol {
+  margin: 0 auto;
+  max-width: 20rem;
+}
+</style>
