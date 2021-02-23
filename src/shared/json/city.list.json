@@ -1,0 +1,223 @@
+[
+    {
+        "id": 5391959,
+        "name": "San Francisco",
+        "state": "CA",
+        "country": "US",
+        "coord": {
+            "lon": -122.419418,
+            "lat": 37.774929
+        }
+    },
+    {
+        "id": 2968815,
+        "name": "Paris",
+        "state": "",
+        "country": "FR",
+        "coord": {
+            "lon": 2.3486,
+            "lat": 48.853401
+        }
+    },
+    {
+        "id": 2968819,
+        "name": "Ville-d'Avray",
+        "state": "",
+        "country": "FR",
+        "coord": {
+            "lon": 2.19311,
+            "lat": 48.823582
+        }
+    },
+    {
+        "id": 2968822,
+        "name": "Villecroze",
+        "state": "",
+        "country": "FR",
+        "coord": {
+            "lon": 6.27542,
+            "lat": 43.58181
+        }
+    },
+    {
+        "id": 2968823,
+        "name": "Villecresnes",
+        "state": "",
+        "country": "FR",
+        "coord": {
+            "lon": 2.5394,
+            "lat": 48.72002
+        }
+    },
+    {
+        "id": 2179537,
+        "name": "Wellington",
+        "state": "",
+        "country": "NZ",
+        "coord": {
+            "lon": 174.775574,
+            "lat": -41.28664
+        }
+    },
+    {
+        "id": 2193732,
+        "name": "Auckland",
+        "state": "",
+        "country": "NZ",
+        "coord": {
+            "lon": 174.743042,
+            "lat": -36.85582
+        }
+    },
+    {
+        "id": 2968833,
+        "name": "Villechien",
+        "state": "",
+        "country": "FR",
+        "coord": {
+            "lon": -0.98652,
+            "lat": 48.578629
+        }
+    },
+    {
+        "id": 1880252,
+        "name": "Singapore",
+        "state": "",
+        "country": "SG",
+        "coord": {
+            "lon": 103.850067,
+            "lat": 1.28967
+        }
+    },
+    {
+        "id": 2147714,
+        "name": "Sydney",
+        "state": "",
+        "country": "AU",
+        "coord": {
+            "lon": 151.207321,
+            "lat": -33.867851
+        }
+    },
+    {
+        "id": 5128581,
+        "name": "New York City",
+        "state": "NY",
+        "country": "US",
+        "coord": {
+            "lon": -74.005966,
+            "lat": 40.714272
+        }
+    },
+    {
+        "id": 4562441,
+        "name": "Yorklyn",
+        "state": "PA",
+        "country": "US",
+        "coord": {
+            "lon": -76.646347,
+            "lat": 39.992321
+        }
+    },
+    {
+        "id": 2950158,
+        "name": "Berlin",
+        "state": "",
+        "country": "DE",
+        "coord": {
+            "lon": 10.45,
+            "lat": 54.033329
+        }
+    },
+    {
+        "id": 2867714,
+        "name": "Munich",
+        "state": "",
+        "country": "DE",
+        "coord": {
+            "lon": 11.57549,
+            "lat": 48.137428
+        }
+    },
+    {
+        "id": 1311874,
+        "name": "Mandalay",
+        "state": "",
+        "country": "MM",
+        "coord": {
+            "lon": 96.083588,
+            "lat": 21.97473
+        }
+    },
+    {
+        "id": 1298824,
+        "name": "Yangon",
+        "state": "",
+        "country": "MM",
+        "coord": {
+            "lon": 96.156113,
+            "lat": 16.805281
+        }
+    },
+    {
+        "id": 8224780,
+        "name": "Cradley Heath",
+        "state": "",
+        "country": "GB",
+        "coord": {
+            "lon": -2.08212,
+            "lat": 52.472141
+        }
+    },
+    {
+        "id": 8224782,
+        "name": "Shirley",
+        "state": "",
+        "country": "GB",
+        "coord": {
+            "lon": -1.81952,
+            "lat": 52.41074
+        }
+    },
+    {
+        "id": 8224783,
+        "name": "Stanley",
+        "state": "",
+        "country": "GB",
+        "coord": {
+            "lon": -1.69846,
+            "lat": 54.867962
+        }
+    },
+    {
+        "id": 8224784,
+        "name": "Stockton Heath",
+        "state": "",
+        "country": "GB",
+        "coord": {
+            "lon": -2.57406,
+            "lat": 53.370838
+        }
+    },
+    {
+        "id": 8224785,
+        "name": "Waterloo",
+        "state": "",
+        "country": "GB",
+        "coord": {
+            "lon": -3.03017,
+            "lat": 53.474541
+        }
+    },
+
+    {
+        "id": 102908597.0,
+        "name": "Gerton",
+        "state": "",
+        "country": "US",
+        "coord": {
+            "lon": -82.348056,
+            "lat": 35.479167
+        }
+    }
+]

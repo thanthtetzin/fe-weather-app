@@ -1,5 +1,6 @@
 <template>
   <b-card class="weatherInfoCard">
+    <p class="cityNotFound" v-if="cityNotFound">City Not found!</p>
     <b-card-title>
       {{day}}
       <p class="date">{{date}}</p>
@@ -16,6 +17,7 @@
 <script>
 import { BIconGeoAltFill } from 'bootstrap-vue'
 import moment from 'moment'
+import randomCityJson from '../shared/json/city.list.json'
 
 export default {
   name: 'WeatherInfoCard',
@@ -29,6 +31,7 @@ export default {
   data () {
     return {
       isLoading: true,
+      cityNotFound: false,
       day: '',
       date: '',
       location: '',
@@ -37,30 +40,54 @@ export default {
       weather: ''
     }
   },
-  created: async function () {
-    await this.loadWeatherForRandomCoordinates()
+  created: function () {
+    if (!this.lat || !this.long) {
+      this.loadWeatherForRandomCoordinates()
+    } else {
+      this.getWeatherByLatLong(this.lat, this.long)
+    }
   },
   methods: {
-    loadWeatherForRandomCoordinates: async function () {
-      this.getWeatherByLatLong(this.lat, this.long)
+    loadWeatherForRandomCoordinates: function () {
+      const randomCityIndex = Math.floor(Math.random() * randomCityJson.length)
+      const randomCityLat = randomCityJson[randomCityIndex].coord.lat
+      const randomCityLon = randomCityJson[randomCityIndex].coord.lon
+      this.getWeatherByLatLong(randomCityLat, randomCityLon)
     },
     getRandomCoordinates: function (from, to, fixed) {
       return (Math.random() * (to - from) + from).toFixed(fixed) * 1
     },
-    getWeatherByLatLong: async function (lat, long) {
+    getWeatherByLatLong: function (lat, long) {
+      const fullUrl = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&appid=${process.env.VUE_APP_OPEN_WEATHER_MAP_API_KEY}`
+      this.fetchWeatherInfoAndLoadData(fullUrl)
+    },
+    getWeatherByCityCountryCode: function (cityName, countryCode) {
+      const fullUrl = `http://api.openweathermap.org/data/2.5/weather?q=${cityName},,${countryCode}&units=metric&appid=${process.env.VUE_APP_OPEN_WEATHER_MAP_API_KEY}`
+      this.fetchWeatherInfoAndLoadData(fullUrl)
+    },
+    fetchWeatherInfoAndLoadData: async function (fullUrl) {
       try {
-        let result = await fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&appid=${process.env.VUE_APP_OPEN_WEATHER_MAP_API_KEY}`)
+        this.cityNotFound = false
+        let result = await fetch(fullUrl)
         result = await result.json()
-        const timezoneInMinutes = result.timezone / 60
-        this.day = moment().utcOffset(timezoneInMinutes).format('dddd') || '------'
-        this.date = moment().utcOffset(timezoneInMinutes).format('DD MMM YYYY') || '-- --- ----'
-        this.location = `${result.name}, ${result.sys.country}` || '--, --'
-        this.weatherIcon = `http://openweathermap.org/img/wn/${result.weather[0].icon}@2x.png` || ''
-        this.temp = `${Math.round(result.main.temp)}°C` || '°C'
-        this.weather = result.weather[0].main || '------'
+        if (result.cod === '404') {
+          throw new Error(result.message)
+        }
+        this.loadInfoToCard(result)
       } catch (error) {
+        this.cityNotFound = true
         console.log('Error in getting weather: ', error.message)
+        this.loadInfoToCard()
       }
+    },
+    loadInfoToCard: function (result = null) {
+      const timezoneInMinutes = result ? result.timezone / 60 : null
+      this.day = result ? moment().utcOffset(timezoneInMinutes).format('dddd') : '------'
+      this.date = result ? moment().utcOffset(timezoneInMinutes).format('DD MMM YYYY') : '-- --- ----'
+      this.location = result && result.sys ? `${result.name}, ${result.sys.country}` : '--, --'
+      this.weatherIcon = result && result.weather ? `http://openweathermap.org/img/wn/${result.weather[0].icon}@2x.png` : ''
+      this.temp = result && result.main ? `${Math.round(result.main.temp)}°C` : '_°C'
+      this.weather = result && result.weather ? result.weather[0].main : '------'
     }
   }
 }
@@ -71,7 +98,12 @@ export default {
   border: none;
   box-shadow: 0 7px 8px -4px #696868;
   color: #ffffff;
+  min-height: 350px;
 
+  p.cityNotFound {
+    color: #ffe007;
+    font-weight: bolder;
+  }
   div.card-body {
     padding: 25px;
 
