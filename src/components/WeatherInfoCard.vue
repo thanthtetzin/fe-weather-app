@@ -5,7 +5,7 @@
       {{day}}
       <p class="date">{{date}}</p>
     </b-card-title>
-    <b-card-text>
+    <b-card-text class="location">
       <b-icon-geo-alt-fill /> {{location}}
     </b-card-text>
     <img class="weatherIcon" :src="weatherIcon">
