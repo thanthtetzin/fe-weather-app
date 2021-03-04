@@ -58,11 +58,11 @@ export default {
       return (Math.random() * (to - from) + from).toFixed(fixed) * 1
     },
     getWeatherByLatLong: function (lat, long) {
-      const fullUrl = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&appid=${process.env.VUE_APP_OPEN_WEATHER_MAP_API_KEY}`
+      const fullUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&appid=${process.env.VUE_APP_OPEN_WEATHER_MAP_API_KEY}`
       this.fetchWeatherInfoAndLoadData(fullUrl)
     },
     getWeatherByCityCountryCode: function (cityName, countryCode) {
-      const fullUrl = `http://api.openweathermap.org/data/2.5/weather?q=${cityName},,${countryCode}&units=metric&appid=${process.env.VUE_APP_OPEN_WEATHER_MAP_API_KEY}`
+      const fullUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName},,${countryCode}&units=metric&appid=${process.env.VUE_APP_OPEN_WEATHER_MAP_API_KEY}`
       this.fetchWeatherInfoAndLoadData(fullUrl)
     },
     fetchWeatherInfoAndLoadData: async function (fullUrl) {
@@ -85,7 +85,7 @@ export default {
       this.day = result ? moment().utcOffset(timezoneInMinutes).format('dddd') : '------'
       this.date = result ? moment().utcOffset(timezoneInMinutes).format('DD MMM YYYY') : '-- --- ----'
       this.location = result && result.sys ? `${result.name}, ${result.sys.country}` : '--, --'
-      this.weatherIcon = result && result.weather ? `http://openweathermap.org/img/wn/${result.weather[0].icon}@2x.png` : ''
+      this.weatherIcon = result && result.weather ? `https://openweathermap.org/img/wn/${result.weather[0].icon}@2x.png` : ''
       this.temp = result && result.main ? `${Math.round(result.main.temp)}°C` : '_°C'
       this.weather = result && result.weather ? result.weather[0].main : '------'
     }
