@@ -68,9 +68,9 @@ export default {
       }
       document.cookie = name + "=" + (value || "") + expires + "; path=/";
     },
-    test: async function () {
+    test: function () {
       const types = ['users', 'installations', 'posts']
-      types.map((type) => {
+      types.map(async (type) => {
          try {
             this.cityNotFound = false
             let result = await fetch('https://62cc8d768042b16aa7d11817.mockapi.io/search', {
