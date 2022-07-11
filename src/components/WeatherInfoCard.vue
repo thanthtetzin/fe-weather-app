@@ -21,7 +21,9 @@
           <span>
             All Results
             <span>
-              ({{ totalResult }})
+              "("
+              "{{ totalResult }}"
+              ")"
             </span>
           </span>
         </li>
@@ -29,7 +31,9 @@
           <span>
             Content
             <span>
-              "(" "{{ totalContents }}" ")"
+              "("
+              "{{ totalContents }}"
+              ")"
             </span>
           </span>
         </li>
@@ -37,7 +41,9 @@
           <span>
             News
             <span>
-              "(" "{{ totalNews }}" ")"
+              "("
+              "{{ totalNews }}"
+              ")"
             </span>
           </span>
         </li>
@@ -45,7 +51,9 @@
           <span>
             Users"
             <span>
-              "(" "{{ totalUsers }}" ")"
+              "("
+              "{{ totalUsers }}"
+              ")"
             </span>
           </span>
         </li>
