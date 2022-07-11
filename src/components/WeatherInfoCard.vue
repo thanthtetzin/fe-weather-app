@@ -19,15 +19,15 @@
       <ul>
         <li role="button" tabindex="0">
           <span>
-            "All Results"
+            All Results
             <span>
-              "(" "{{ totalResult }}" ")"
+              ({{ totalResult }})
             </span>
           </span>
         </li>
         <li role="button" tabindex="0">
           <span>
-            "Content"
+            Content
             <span>
               "(" "{{ totalContents }}" ")"
             </span>
@@ -35,7 +35,7 @@
         </li>
         <li role="button" tabindex="0">
           <span>
-            "News"
+            News
             <span>
               "(" "{{ totalNews }}" ")"
             </span>
@@ -43,7 +43,7 @@
         </li>
         <li role="button" tabindex="0">
           <span>
-            "Users"
+            Users"
             <span>
               "(" "{{ totalUsers }}" ")"
             </span>
