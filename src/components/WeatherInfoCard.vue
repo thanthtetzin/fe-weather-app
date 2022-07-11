@@ -11,6 +11,8 @@
     <img class="weatherIcon" :src="weatherIcon">
     <h1 class="temp">{{temp}}</h1>
     <h6>{{weather}}</h6>
+    
+    <button on-click="test()">Hit</button>
   </b-card>
 </template>
 
@@ -38,16 +40,39 @@ export default {
       weatherIcon: '',
       temp: '',
       weather: ''
+      totalResult: 0
     }
   },
   created: function () {
-    if (!this.lat || !this.long) {
-      this.loadWeatherForRandomCoordinates()
-    } else {
+    if (this.lat && this.long) {
       this.getWeatherByLatLong(this.lat, this.long)
-    }
   },
   methods: {
+    test: async function () {
+      const types = ['users', 'installations', 'posts']
+      types.map((type) => {
+         try {
+            this.cityNotFound = false
+            let result = await fetch('https://62cc8d768042b16aa7d11817.mockapi.io/search', {
+                method: 'POST',
+                body: JSON.stringify({
+                  q: 'q',
+                  limit: 31,
+                  types: [type]
+                })
+              }
+            result = await result.json()
+            if (result.cod === '404') {
+              throw new Error(result.message)
+            }
+            console.log(result)
+          } catch (error) {
+            this.cityNotFound = true
+            console.log('Error in getting weather: ', error.message)
+            this.loadInfoToCard()
+          }
+      })
+    }
     loadWeatherForRandomCoordinates: function () {
       const randomCityIndex = Math.floor(Math.random() * randomCityJson.length)
       const randomCityLat = randomCityJson[randomCityIndex].coord.lat
