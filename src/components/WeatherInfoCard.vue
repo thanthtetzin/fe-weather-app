@@ -31,7 +31,7 @@ export default {
     lat: Number,
     long: Number
   },
-  data() {
+  data () {
     return {
       isLoading: true,
       cityNotFound: false,
