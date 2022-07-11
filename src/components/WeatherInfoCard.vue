@@ -89,7 +89,8 @@ export default {
           if (result.cod === '404') {
             throw new Error(result.message)
           }
-          console.log(result)
+          console.log('responses: ', result)
+          this.totalResult += result.entries.length
         } catch (error) {
           this.cityNotFound = true
           console.log('Error in getting weather: ', error.message)
