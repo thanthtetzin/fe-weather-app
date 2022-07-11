@@ -2,16 +2,16 @@
   <b-card class="weatherInfoCard">
     <p class="cityNotFound" v-if="cityNotFound">City Not found!</p>
     <b-card-title>
-      {{day}}
-      <p class="date">{{date}}</p>
+      {{ day }}
+      <p class="date">{{ date }}</p>
     </b-card-title>
     <b-card-text class="location">
-      <b-icon-geo-alt-fill /> {{location}}
+      <b-icon-geo-alt-fill /> {{ location }}
     </b-card-text>
-    <img class="weatherIcon" :src="weatherIcon">
-    <h1 class="temp">{{temp}}</h1>
-    <h6>{{weather}}</h6>
-    
+    <img class="weatherIcon" :src="weatherIcon" />
+    <h1 class="temp">{{ temp }}</h1>
+    <h6>{{ weather }}</h6>
+
     <input v-model="searchTerm" />
     <button on-click="test()">Search</button>
   </b-card>
@@ -25,13 +25,13 @@ import randomCityJson from '../shared/json/city.list.json'
 export default {
   name: 'WeatherInfoCard',
   components: {
-    BIconGeoAltFill
+    BIconGeoAltFill,
   },
   props: {
     lat: Number,
-    long: Number
+    long: Number,
   },
-  data () {
+  data() {
     return {
       isLoading: true,
       cityNotFound: false,
@@ -42,7 +42,7 @@ export default {
       temp: '',
       weather: '',
       searchTerm: '',
-      totalResult: 0
+      totalResult: 0,
     }
   },
   created: function () {
@@ -55,43 +55,46 @@ export default {
   },
   methods: {
     getCookie: function (name) {
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; ${name}=`);
-      if (parts.length === 2) return parts.pop().split(';').shift();
+      const value = `; ${document.cookie}`
+      const parts = value.split(`; ${name}=`)
+      if (parts.length === 2) return parts.pop().split(';').shift()
     },
     setCookie: function (name, value, days) {
-      var expires = "";
+      var expires = ''
       if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        expires = "; expires=" + date.toUTCString();
+        var date = new Date()
+        date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000)
+        expires = '; expires=' + date.toUTCString()
       }
-      document.cookie = name + "=" + (value || "") + expires + "; path=/";
+      document.cookie = name + '=' + (value || '') + expires + '; path=/'
     },
     test: function () {
-      const types = ['users', 'installations', 'posts'];
-      this.totalResult = 0;
+      const types = ['users', 'installations', 'posts']
+      this.totalResult = 0
       types.map(async (type) => {
-         try {
-            let result = await fetch('https://62cc8d768042b16aa7d11817.mockapi.io/search', {
-                method: 'POST',
-                body: JSON.stringify({
-                  cookie: this.getCookie('wsessionid'),
-                  q: this.searchTerm,
-                  limit: 31,
-                  types: [type]
-                })
-            })
-            result = await result.json()
-            if (result.cod === '404') {
-              throw new Error(result.message)
+        try {
+          let result = await fetch(
+            'https://62cc8d768042b16aa7d11817.mockapi.io/search',
+            {
+              method: 'POST',
+              body: JSON.stringify({
+                cookie: this.getCookie('wsessionid'),
+                q: this.searchTerm,
+                limit: 31,
+                types: [type]
+              })
             }
-            console.log(result)
-          } catch (error) {
-            this.cityNotFound = true
-            console.log('Error in getting weather: ', error.message)
-            this.loadInfoToCard()
+          )
+          result = await result.json()
+          if (result.cod === '404') {
+            throw new Error(result.message)
           }
+          console.log(result)
+        } catch (error) {
+          this.cityNotFound = true
+          console.log('Error in getting weather: ', error.message)
+          this.loadInfoToCard()
+        }
       })
     },
     loadWeatherForRandomCoordinates: function () {
@@ -128,14 +131,26 @@ export default {
     },
     loadInfoToCard: function (result = null) {
       const timezoneInMinutes = result ? result.timezone / 60 : null
-      this.day = result ? moment().utcOffset(timezoneInMinutes).format('dddd') : '------'
-      this.date = result ? moment().utcOffset(timezoneInMinutes).format('DD MMM YYYY') : '-- --- ----'
-      this.location = result && result.sys ? `${result.name}, ${result.sys.country}` : '--, --'
-      this.weatherIcon = result && result.weather ? `https://openweathermap.org/img/wn/${result.weather[0].icon}@2x.png` : ''
-      this.temp = result && result.main ? `${Math.round(result.main.temp)}°C` : '_°C'
-      this.weather = result && result.weather ? result.weather[0].main : '------'
-    }
-  }
+      this.day = result
+        ? moment().utcOffset(timezoneInMinutes).format('dddd')
+        : '------'
+      this.date = result
+        ? moment().utcOffset(timezoneInMinutes).format('DD MMM YYYY')
+        : '-- --- ----'
+      this.location =
+        result && result.sys
+          ? `${result.name}, ${result.sys.country}`
+          : '--, --'
+      this.weatherIcon =
+        result && result.weather
+          ? `https://openweathermap.org/img/wn/${result.weather[0].icon}@2x.png`
+          : ''
+      this.temp =
+        result && result.main ? `${Math.round(result.main.temp)}°C` : '_°C'
+      this.weather =
+        result && result.weather ? result.weather[0].main : '------'
+    },
+  },
 }
 </script>
 <style scoped lang="scss">
