@@ -14,6 +14,43 @@
 
     <input v-model="searchTerm" />
     <button @click="test()" type="button">Search</button>
+
+    <div class="tabs">
+      <ul>
+        <li role="button" tabindex="0">
+          <span>
+            "All Results"
+            <span>
+              "(" {{ totalResult }} ")"
+            </span>
+          </span>
+        </li>
+        <li role="button" tabindex="0">
+          <span>
+            "Content"
+            <span>
+              "(" {{ totalContents }} ")"
+            </span>
+          </span>
+        </li>
+        <li role="button" tabindex="0">
+          <span>
+            "News"
+            <span>
+              "(" {{ totalNews }} ")"
+            </span>
+          </span>
+        </li>
+        <li role="button" tabindex="0">
+          <span>
+            "Users"
+            <span>
+              "(" {{ totalUsers }} ")"
+            </span>
+          </span>
+        </li>
+      </ul>
+    </div>
   </b-card>
 </template>
 
@@ -42,7 +79,10 @@ export default {
       temp: '',
       weather: '',
       searchTerm: '',
-      totalResult: 0
+      totalResult: 0,
+      totalUsers: 0,
+      totalContents: 0,
+      totalNews: 0
     }
   },
   created: function () {
@@ -69,8 +109,11 @@ export default {
       document.cookie = name + '=' + (value || '') + expires + '; path=/'
     },
     test: function () {
-      const types = ['users', 'installations', 'posts']
+      const types = ['users', 'contents', 'news']
       this.totalResult = 0
+      this.totalUsers = 0
+      this.totalContents = 0
+      this.totalNews = 0
       types.map(async (type) => {
         try {
           let result = await fetch(
@@ -88,6 +131,13 @@ export default {
           result = await result.json()
           if (result.cod === '404') {
             throw new Error(result.message)
+          }
+          if (type === 'users') {
+            this.totalUsers = result.entries.length
+          } else if (type === 'contents') {
+            this.totalContents = result.entries.length
+          } else if (type === 'news') {
+            this.totalNews = result.entries.length
           }
           console.log('responses: ', result)
           this.totalResult += result.entries.length
