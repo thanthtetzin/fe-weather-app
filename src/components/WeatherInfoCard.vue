@@ -93,7 +93,7 @@ export default {
             this.loadInfoToCard()
           }
       })
-    }
+    },
     loadWeatherForRandomCoordinates: function () {
       const randomCityIndex = Math.floor(Math.random() * randomCityJson.length)
       const randomCityLat = randomCityJson[randomCityIndex].coord.lat
