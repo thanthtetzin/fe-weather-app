@@ -54,12 +54,12 @@ export default {
     this.setCookie('wsessionid', 'testing', 2)
   },
   methods: {
-    function getCookie(name) {
+    getCookie: function (name) {
       const value = `; ${document.cookie}`;
       const parts = value.split(`; ${name}=`);
       if (parts.length === 2) return parts.pop().split(';').shift();
-    }
-    function setCookie(name, value, days) {
+    },
+    setCookie: function (name, value, days) {
       var expires = "";
       if (days) {
         var date = new Date();
