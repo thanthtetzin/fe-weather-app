@@ -12,7 +12,8 @@
     <h1 class="temp">{{temp}}</h1>
     <h6>{{weather}}</h6>
     
-    <button on-click="test()">Hit</button>
+    <input v-model="searchTerm" />
+    <button on-click="test()">Search</button>
   </b-card>
 </template>
 
@@ -39,15 +40,34 @@ export default {
       location: '',
       weatherIcon: '',
       temp: '',
-      weather: ''
+      weather: '',
+      searchTerm: '',
       totalResult: 0
     }
   },
   created: function () {
     if (this.lat && this.long) {
       this.getWeatherByLatLong(this.lat, this.long)
+    }
   },
+  mounted: function () {
+    this.setCookie('wsessionid', 'testing', 2)
+  }
   methods: {
+    function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+    function setCookie(name, value, days) {
+      var expires = "";
+      if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+      }
+      document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    },
     test: async function () {
       const types = ['users', 'installations', 'posts']
       types.map((type) => {
@@ -56,6 +76,7 @@ export default {
             let result = await fetch('https://62cc8d768042b16aa7d11817.mockapi.io/search', {
                 method: 'POST',
                 body: JSON.stringify({
+                  cookie: this.getCookie('wsessionid')
                   q: 'q',
                   limit: 31,
                   types: [type]
