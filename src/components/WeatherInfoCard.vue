@@ -25,11 +25,11 @@ import randomCityJson from '../shared/json/city.list.json'
 export default {
   name: 'WeatherInfoCard',
   components: {
-    BIconGeoAltFill,
+    BIconGeoAltFill
   },
   props: {
     lat: Number,
-    long: Number,
+    long: Number
   },
   data() {
     return {
@@ -42,7 +42,7 @@ export default {
       temp: '',
       weather: '',
       searchTerm: '',
-      totalResult: 0,
+      totalResult: 0
     }
   },
   created: function () {
@@ -149,8 +149,8 @@ export default {
         result && result.main ? `${Math.round(result.main.temp)}°C` : '_°C'
       this.weather =
         result && result.weather ? result.weather[0].main : '------'
-    },
-  },
+    }
+  }
 }
 </script>
 <style scoped lang="scss">
