@@ -69,19 +69,19 @@ export default {
       document.cookie = name + "=" + (value || "") + expires + "; path=/";
     },
     test: function () {
-      const types = ['users', 'installations', 'posts']
+      const types = ['users', 'installations', 'posts'];
+      this.totalResult = 0;
       types.map(async (type) => {
          try {
-            this.cityNotFound = false
             let result = await fetch('https://62cc8d768042b16aa7d11817.mockapi.io/search', {
                 method: 'POST',
                 body: JSON.stringify({
                   cookie: this.getCookie('wsessionid'),
-                  q: 'q',
+                  q: this.searchTerm,
                   limit: 31,
                   types: [type]
                 })
-              }
+            })
             result = await result.json()
             if (result.cod === '404') {
               throw new Error(result.message)
