@@ -52,7 +52,7 @@ export default {
   },
   mounted: function () {
     this.setCookie('wsessionid', 'testing', 2)
-  }
+  },
   methods: {
     function getCookie(name) {
       const value = `; ${document.cookie}`;
