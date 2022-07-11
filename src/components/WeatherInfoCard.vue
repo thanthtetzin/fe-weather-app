@@ -13,7 +13,7 @@
     <h6>{{ weather }}</h6>
 
     <input v-model="searchTerm" />
-    <button on-click="test()">Search</button>
+    <button @click="test()" type="button">Search</button>
   </b-card>
 </template>
 
