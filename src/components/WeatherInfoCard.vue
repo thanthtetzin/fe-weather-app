@@ -76,7 +76,7 @@ export default {
             let result = await fetch('https://62cc8d768042b16aa7d11817.mockapi.io/search', {
                 method: 'POST',
                 body: JSON.stringify({
-                  cookie: this.getCookie('wsessionid')
+                  cookie: this.getCookie('wsessionid'),
                   q: 'q',
                   limit: 31,
                   types: [type]
