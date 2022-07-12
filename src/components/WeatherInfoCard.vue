@@ -147,7 +147,7 @@ export default {
           } else if (type === 'news') {
             this.totalNews = result.entries.length
           }
-          console.log('responses: ', result)
+          // console.log('responses: ', result)
           this.totalResult += result.entries.length
         } catch (error) {
           this.cityNotFound = true
